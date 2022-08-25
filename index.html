@@ -631,8 +631,9 @@ docker compose up -d
 </code></pre></div>
 You can now access your application with your favourite browser at <a href="http://localhost:8000/">http://localhost:8000/</a>.</p>
 <h2 id="recommended-setup-nginx-server">Recommended: Setup nginx Server</h2>
-<p>We recommend to install an nginx server and enable https.</p>
-<p>Install nginx on your host system. E.g. on Debian-based systems with apt:</p>
+<p>It is not recommended to use the Django webserver due to missing transport encryption, missing security tests and performance tests.<br />
+We recommend to user a webserver like nginx or Apache and enable to https.</p>
+<p>You can install nginx on your host system. E.g. on Debian-based systems with apt-get:</p>
 <div class="highlight"><pre><span></span><code>sudo apt-get update
 sudo apt-get install nginx
 </code></pre></div>
