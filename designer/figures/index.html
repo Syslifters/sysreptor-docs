@@ -37,7 +37,7 @@
         
         
         
-        <link rel="stylesheet" href="../../assets/externals/fonts.googleapis.com/css.css">
+        <link rel="stylesheet" href="../../.cache/plugin/privacy/fonts.googleapis.com/css.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -239,6 +239,29 @@
   
   
     <li class="md-nav__item">
+      <a href="../../user-permissions/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    User Permissions
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+      
+
+
+
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../reporting/writing-findings/" class="md-nav__link">
         
   
@@ -270,10 +293,10 @@
       
         
         
-          <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_3" type="checkbox" id="__nav_3" checked>
+          <input class="md-nav__toggle md-toggle" data-md-toggle="__nav_4" type="checkbox" id="__nav_4" checked>
         
         
-          <label class="md-nav__link" for="__nav_3">
+          <label class="md-nav__link" for="__nav_4">
             
   
   <span class="md-ellipsis">
@@ -285,7 +308,7 @@
           </label>
         
         <nav class="md-nav" aria-label="Report Designer" data-md-level="1">
-          <label class="md-nav__title" for="__nav_3">
+          <label class="md-nav__title" for="__nav_4">
             <span class="md-nav__icon md-icon"></span>
             Report Designer
           </label>
@@ -744,7 +767,7 @@ Except for logos in headers or background images on the title page.</p>
 </code></pre></div>
 <h2 id="figure-numbering">Figure numbering</h2>
 <div class="highlight"><pre><span></span><code><span class="nt">html</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">  </span><span class="k">counter-reset</span><span class="p">:</span><span class="w"> </span><span class="n">figure-counter</span><span class="w"></span>
+<span class="w">  </span><span class="k">counter-reset</span><span class="p">:</span><span class="w"> </span><span class="n">figure-counter</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 
 <span class="nt">figcaption</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
@@ -784,7 +807,7 @@ In the first render-pass it does nothing, in the second pass it collects all pre
 <span class="w">    </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 <span class="p">.</span><span class="nc">lof</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
-<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Abbildung &quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">figure</span><span class="nv">-counter</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot; - &quot;</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Figure &quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">figure</span><span class="nv">-counter</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot; - &quot;</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 <span class="p">.</span><span class="nc">lof</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
 <span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="nf">leader</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="kc">page</span><span class="p">);</span><span class="w"></span>
