@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://sysreptor.com/designer/security-concerns/">
+        <link rel="canonical" href="https://docs.sysreptor.com/designer/security-concerns/">
       
       
         
@@ -59,7 +59,7 @@
       
         <meta  property="og:description"  content="None" >
       
-        <meta  property="og:image"  content="https://sysreptor.com/assets/images/social/designer/security-concerns.png" >
+        <meta  property="og:image"  content="https://docs.sysreptor.com/assets/images/social/designer/security-concerns.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -67,7 +67,7 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://sysreptor.com/designer/security-concerns/" >
+        <meta  property="og:url"  content="https://docs.sysreptor.com/designer/security-concerns/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
@@ -75,7 +75,7 @@
       
         <meta  name="twitter:description"  content="None" >
       
-        <meta  name="twitter:image"  content="https://sysreptor.com/assets/images/social/designer/security-concerns.png" >
+        <meta  name="twitter:image"  content="https://docs.sysreptor.com/assets/images/social/designer/security-concerns.png" >
       
     
     
@@ -381,6 +381,26 @@
   
   
     <li class="md-nav__item">
+      <a href="../designer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Designer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../page-layout/" class="md-nav__link">
         
   
@@ -481,6 +501,46 @@
   
   
     <li class="md-nav__item">
+      <a href="../charts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Charts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../formatting-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formatting Utilities
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../design-guides/" class="md-nav__link">
         
   
@@ -530,6 +590,17 @@
         
       
       
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Security Concerns
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
       <a href="./" class="md-nav__link md-nav__link--active">
         
   
@@ -539,6 +610,52 @@
   
 
       </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#template-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Injection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests-to-external-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requests to External Systems
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#denial-of-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Denial of Service
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
       
     </li>
   
@@ -595,6 +712,41 @@
     
   
   
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#template-injection" class="md-nav__link">
+    <span class="md-ellipsis">
+      Template Injection
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#requests-to-external-systems" class="md-nav__link">
+    <span class="md-ellipsis">
+      Requests to External Systems
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#denial-of-service" class="md-nav__link">
+    <span class="md-ellipsis">
+      Denial of Service
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
 </nav>
                   </div>
                 </div>
@@ -608,10 +760,34 @@
 
 
 <h1 id="security-concerns">Security Concerns</h1>
-<p>The Designer uses server-side rendering for generating PDF reports. This allows template injection attacks and can lead to remote code execution (RCE).</p>
+<h2 id="template-injection">Template Injection</h2>
+<p>The Designer uses server-side rendering for generating PDF reports. 
+This allows template injection attacks and could possibly lead to remote code execution (RCE).</p>
 <p>This is intentional.</p>
-<p>The template injection is sandboxed in a dedicated Chromium process in the main Docker container. Chromium is running in offline mode. It has no possibility to connect to remote locations. It requires an exploit in the Chromium browser to get access to the container and the application.</p>
-<p>We still recommend to limit access to the Designer via the <a href="/user-permissions">User Permissions</a> following the principle of least privilege. (Note: Limiting access to the designer via privileges is not yet possible but will be.)</p>
+<p>The template injection is sandboxed in a dedicated Chromium process in the main Docker container. 
+Chromium is running in offline mode. It has no possibility to connect to remote locations. 
+It requires an exploit in the Chromium browser to get access to the container and the application.</p>
+<p>We still recommend to limit access to the Designer via the <a href="/user-permissions">User Permissions</a> following the principle of least privilege. </p>
+<h2 id="requests-to-external-systems">Requests to External Systems</h2>
+<p>All Requests to External Systems from within the rendering workflow are blocked.
+This prevents data exfiltration to external systems if attackers are somehow able to inject templates or if there are vulnerabilities in third-party JS libraries.</p>
+<p>This is ensured by two measures:</p>
+<ul>
+<li>In headless Chromium the offline mode is used. This simulates that the browser is offline and blocks all requests.</li>
+<li>For WeasyPrint a custom URL fetcher is used that prevents requests to external systems. 
+  It only allows <code>data:</code>-URLs and access to files uploaded to SysReptor (designer assets, images).
+  No HTTP requests are involved when including this resources (not event to localhost), 
+  but a custom handler that returns the resources as data following the <a href="https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#security" target="_blank">WeasyPrint security recommendations</a>.</li>
+</ul>
+<h2 id="denial-of-service">Denial of Service</h2>
+<p>PDF rendering is a long-running and resource intensive process.
+Especially WeasyPrint can sometimes be slow when rendering long and complex reports. </p>
+<p>Denial of Service is possible by injecting long-running JavaScript in the Vue template or by using long-running HTML and CSS in WeasyPrint.</p>
+<p>The Vue template rendering process is aborted if it takes longer than a certain time.</p>
+<p>Currently no DoS prevention is implemented for WeasyPrint, 
+because we first need to collect data on the average resource usage and rendering times of legitimate reports.
+For now we accept the risk of DoS in WeasyPrint, since we do not want to prevent rendering long and complex reports which might take some time and system resources.
+This behavior might change in the future.</p>
 
   
   

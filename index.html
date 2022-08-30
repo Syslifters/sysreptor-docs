@@ -8,7 +8,7 @@
       
       
       
-        <link rel="canonical" href="https://sysreptor.com/">
+        <link rel="canonical" href="https://docs.sysreptor.com/">
       
       
         
@@ -59,7 +59,7 @@
       
         <meta  property="og:description"  content="None" >
       
-        <meta  property="og:image"  content="https://sysreptor.com/assets/images/social/index.png" >
+        <meta  property="og:image"  content="https://docs.sysreptor.com/assets/images/social/index.png" >
       
         <meta  property="og:image:type"  content="image/png" >
       
@@ -67,7 +67,7 @@
       
         <meta  property="og:image:height"  content="630" >
       
-        <meta  property="og:url"  content="https://sysreptor.com/" >
+        <meta  property="og:url"  content="https://docs.sysreptor.com/" >
       
         <meta  name="twitter:card"  content="summary_large_image" >
       
@@ -75,7 +75,7 @@
       
         <meta  name="twitter:description"  content="None" >
       
-        <meta  name="twitter:image"  content="https://sysreptor.com/assets/images/social/index.png" >
+        <meta  name="twitter:image"  content="https://docs.sysreptor.com/assets/images/social/index.png" >
       
     
     
@@ -389,6 +389,26 @@
   
   
     <li class="md-nav__item">
+      <a href="designer/designer/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Designer
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
       <a href="designer/page-layout/" class="md-nav__link">
         
   
@@ -474,6 +494,46 @@
   
   <span class="md-ellipsis">
     Footnotes
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="designer/charts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Charts
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="designer/formatting-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formatting Utilities
   </span>
   
 
@@ -621,23 +681,27 @@ There will also be a commercial edition with additional features.</p>
 <li>Latest Chrome, Edge, Firefox (Safari currently not officially supported)</li>
 </ul>
 <h2 id="install">Install</h2>
-<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1">1</a></span>
-<span class="normal"><a href="#__codelineno-0-2">2</a></span>
-<span class="normal"><a href="#__codelineno-0-3">3</a></span>
-<span class="normal"><a href="#__codelineno-0-4">4</a></span>
-<span class="normal"><a href="#__codelineno-0-5">5</a></span>
-<span class="normal"><a href="#__codelineno-0-6">6</a></span>
-<span class="normal"><a href="#__codelineno-0-7">7</a></span>
-<span class="normal"><a href="#__codelineno-0-8">8</a></span>
-<span class="normal"><a href="#__codelineno-0-9">9</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>git clone https://github.com/Syslifters/sysreptor.git
+<p><div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal"><a href="#__codelineno-0-1"> 1</a></span>
+<span class="normal"><a href="#__codelineno-0-2"> 2</a></span>
+<span class="normal"><a href="#__codelineno-0-3"> 3</a></span>
+<span class="normal"><a href="#__codelineno-0-4"> 4</a></span>
+<span class="normal"><a href="#__codelineno-0-5"> 5</a></span>
+<span class="normal"><a href="#__codelineno-0-6"> 6</a></span>
+<span class="normal"><a href="#__codelineno-0-7"> 7</a></span>
+<span class="normal"><a href="#__codelineno-0-8"> 8</a></span>
+<span class="normal"><a href="#__codelineno-0-9"> 9</a></span>
+<span class="normal"><a href="#__codelineno-0-10">10</a></span>
+<span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>git clone https://github.com/Syslifters/sysreptor.git
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="c1"># Alternative via SSH: git clone git@github.com:Syslifters/sysreptor.git</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nb">cd</span> deploy
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a><span class="c1"># Optionally update database credentials in docker-compose.yml</span>
-<a id="__codelineno-0-5" name="__codelineno-0-5"></a>docker compose up --build -d
-<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="c1"># This command might take a few minutes when you run it the first time</span>
-<a id="__codelineno-0-7" name="__codelineno-0-7"></a><span class="c1"># It is building your image and preparing all the nice stuff you will want to use</span>
-<a id="__codelineno-0-8" name="__codelineno-0-8"></a>docker compose <span class="nb">exec</span> app python3 manage.py createsuperuser
-<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># Now you have to specify your initial user&#39;s name and password</span>
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>mv app.env.example app.env
+<a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="c1"># Update keys and credentials in app.env (e.g. SECRET_KEY) </span>
+<a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="c1"># Optionally update database credentials in docker-compose.yml</span>
+<a id="__codelineno-0-7" name="__codelineno-0-7"></a>docker compose up --build -d
+<a id="__codelineno-0-8" name="__codelineno-0-8"></a><span class="c1"># This command might take a few minutes when you run it the first time</span>
+<a id="__codelineno-0-9" name="__codelineno-0-9"></a><span class="c1"># It is building your image and preparing all the nice stuff you will want to use</span>
+<a id="__codelineno-0-10" name="__codelineno-0-10"></a>docker compose <span class="nb">exec</span> app python3 manage.py createsuperuser
+<a id="__codelineno-0-11" name="__codelineno-0-11"></a><span class="c1"># Now you have to specify your initial user&#39;s name and password</span>
 </code></pre></div></td></tr></table></div>
 You can now access your application with your favourite browser at <a href="http://localhost:8000/">http://localhost:8000/</a>.</p>
 <h2 id="recommended-setup-nginx-server">Recommended: Setup nginx Server</h2>
