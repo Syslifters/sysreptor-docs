@@ -694,7 +694,7 @@ There will also be a commercial edition with additional features.</p>
 <span class="normal"><a href="#__codelineno-0-11">11</a></span></pre></div></td><td class="code"><div><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1"></a>git clone https://github.com/Syslifters/sysreptor.git
 <a id="__codelineno-0-2" name="__codelineno-0-2"></a><span class="c1"># Alternative via SSH: git clone git@github.com:Syslifters/sysreptor.git</span>
 <a id="__codelineno-0-3" name="__codelineno-0-3"></a><span class="nb">cd</span> deploy
-<a id="__codelineno-0-4" name="__codelineno-0-4"></a>mv app.env.example app.env
+<a id="__codelineno-0-4" name="__codelineno-0-4"></a>cp app.env.example app.env
 <a id="__codelineno-0-5" name="__codelineno-0-5"></a><span class="c1"># Update keys and credentials in app.env (e.g. SECRET_KEY) </span>
 <a id="__codelineno-0-6" name="__codelineno-0-6"></a><span class="c1"># Optionally update database credentials in docker-compose.yml</span>
 <a id="__codelineno-0-7" name="__codelineno-0-7"></a>docker compose up --build -d
