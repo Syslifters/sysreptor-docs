@@ -288,7 +288,7 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reporting/writing-findings/" class="md-nav__link">
+      <a href="../../reporting/markdown-features/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
@@ -309,11 +309,32 @@
   
   
     <li class="md-nav__item">
-      <a href="../../reporting/writing-findings/" class="md-nav__link">
+      <a href="../../reporting/referencing-sections/" class="md-nav__link">
         
   
   <span class="md-ellipsis">
-    Writing Findings
+    Reference Sections
+    
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../reporting/locking/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Locked Findings & Sections
     
   </span>
   
@@ -464,6 +485,66 @@
   <a href="#appendix-numbering" class="md-nav__link">
     <span class="md-ellipsis">
       Appendix Numbering
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table of Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heading-numbers-in-toc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heading Numbers in TOC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-of-contents-simple-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents Simple Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-of-contents-complex-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents Complex Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-items-in-toc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include items in TOC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencing-sections-in-text-outside-of-toc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referencing sections in text (outside of TOC)
     </span>
   </a>
   
@@ -695,6 +776,66 @@
   
 </li>
       
+        <li class="md-nav__item">
+  <a href="#table-of-contents" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Table of Contents">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#heading-numbers-in-toc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Heading Numbers in TOC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-of-contents-simple-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents Simple Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#table-of-contents-complex-example" class="md-nav__link">
+    <span class="md-ellipsis">
+      Table of Contents Complex Example
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#include-items-in-toc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Include items in TOC
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#referencing-sections-in-text-outside-of-toc" class="md-nav__link">
+    <span class="md-ellipsis">
+      Referencing sections in text (outside of TOC)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
     </ul>
   
 </nav>
@@ -892,6 +1033,178 @@ E.g. with A, A.1, A.2, B, B.1, etc. instead contiuned numbering 4, 4.1, 4.2, 5, 
 <span class="w">    </span><span class="k">counter-reset</span><span class="p">:</span><span class="w"> </span><span class="n">h3-counter</span><span class="p">;</span><span class="w"></span>
 <span class="p">}</span><span class="w"></span>
 </code></pre></div></td></tr></table></div>
+<h2 id="table-of-contents">Table of Contents</h2>
+<p>A table of contents can be included in reports via the <code>&lt;table-of-contents&gt;</code> component.
+This component collects all elements with the class <code>in-toc</code>, and provides them as variables.
+This component uses delayed multi-pass rendering to ensure that all items referenced in the TOC are already rendered and can be referenced.</p>
+<h3 id="heading-numbers-in-toc">Heading Numbers in TOC</h3>
+<p>Heading numbers can be added purely with CSS using counters.
+However, in order to use the correct counters, the nesting level of the heading needs to be known by CSS rules.
+These cannot be determined soely in CSS.</p>
+<p>The <code>&lt;table-of-contents&gt;</code> component determines the nesting level and provides this information.
+<code>h1</code> to <code>h6</code> tags are assigned the correct level.
+If you want to reference other elements in the TOC or overwrite the level, set it via the <code>data-toc-level</code> attribute.</p>
+<p>All HTML attributes of the target element are collected and passed to <code>&lt;table-of-contents&gt;</code>.
+This can be used to e.g. determine if an item is in an appendix section or regular chapter.</p>
+<h3 id="table-of-contents-simple-example">Table of Contents Simple Example</h3>
+<p>This example renders a table of contents with
+* heading title
+* page number
+* links entries to the target pages, such that you can click on the TOC entries and jump to the referenced pa</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">table-of-contents</span> <span class="na">v-slot</span><span class="o">=</span><span class="s">&quot;tocItems&quot;</span><span class="p">&gt;</span>
+  <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;toc&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">template</span> <span class="na">v-for</span><span class="o">=</span><span class="s">&quot;item in tocItems&quot;</span><span class="p">&gt;</span>
+      <span class="p">&lt;</span><span class="nt">li</span> <span class="na">:class</span><span class="o">=</span><span class="s">&quot;&#39;level-&#39; + item.level&quot;</span><span class="p">&gt;&lt;</span><span class="nt">a</span> <span class="na">:href</span><span class="o">=</span><span class="s">&quot;item.href&quot;</span><span class="p">&gt;</span>{{ item.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+  <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table-of-contents</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">black</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="kc">page</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">float</span><span class="p">:</span><span class="w"> </span><span class="kc">right</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="nt">ul</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">list-style</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="p">.</span><span class="nc">level-1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">0.7</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="p">.</span><span class="nc">level-2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-left</span><span class="p">:</span><span class="w"> </span><span class="mf">1.5</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">0.35</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="p">.</span><span class="nc">level-3</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-left</span><span class="p">:</span><span class="w"> </span><span class="mi">3</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">0.25</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">normal</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="table-of-contents-complex-example">Table of Contents Complex Example</h3>
+<p>This example renders a table of contents with
+* heading number (via CSS counters)
+* heading title
+* a leader (line of dots between title and page number)
+* page number
+* links entries to the target pages, such that you can click on the TOC entries and jump to the referenced page
+* supports regular chapters and appendix chapters</p>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">table-of-contents</span> <span class="na">v-slot</span><span class="o">=</span><span class="s">&quot;tocItems&quot;</span><span class="p">&gt;</span>
+    <span class="p">&lt;</span><span class="nt">ul</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;toc&quot;</span><span class="p">&gt;</span>
+        <span class="p">&lt;</span><span class="nt">template</span> <span class="na">v-for</span><span class="o">=</span><span class="s">&quot;item in tocItems&quot;</span><span class="p">&gt;</span>
+            <span class="p">&lt;</span><span class="nt">li</span> <span class="na">:class</span><span class="o">=</span><span class="s">&quot;[&#39;toc-level-&#39; + item.level, (item.attrs.class || &#39;&#39;).split(&#39; &#39;).includes(&#39;numbered&#39;) ? &#39;numbered&#39; : &#39;&#39;, (item.attrs.class || &#39;&#39;).split(&#39; &#39;).includes(&#39;numbered-appendix&#39;) ? &#39;numbered-appendix&#39; : &#39;&#39;]&quot;</span><span class="p">&gt;</span>
+                <span class="p">&lt;</span><span class="nt">a</span> <span class="na">:href</span><span class="o">=</span><span class="s">&quot;item.href&quot;</span><span class="p">&gt;</span>{{ item.title }}<span class="p">&lt;/</span><span class="nt">a</span><span class="p">&gt;</span>
+            <span class="p">&lt;/</span><span class="nt">li</span><span class="p">&gt;</span>
+        <span class="p">&lt;/</span><span class="nt">template</span><span class="p">&gt;</span>
+    <span class="p">&lt;/</span><span class="nt">ul</span><span class="p">&gt;</span>
+<span class="p">&lt;/</span><span class="nt">table-of-contents</span><span class="p">&gt;</span>
+</code></pre></div>
+<div class="highlight"><pre><span></span><code><span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="nt">a</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">color</span><span class="p">:</span><span class="w"> </span><span class="kc">black</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">text-decoration</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-style</span><span class="p">:</span><span class="w"> </span><span class="kc">inherit</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">after</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="nf">leader</span><span class="p">(</span><span class="s2">&quot;.&quot;</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="kc">page</span><span class="p">);</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc</span><span class="w"> </span><span class="nt">li</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">list-style</span><span class="p">:</span><span class="w"> </span><span class="kc">none</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-left</span><span class="p">:</span><span class="w"> </span><span class="mi">0</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc-level-1</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">14</span><span class="kt">pt</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">0.8</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc-level-1</span><span class="p">.</span><span class="nc">numbered</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h1</span><span class="nv">-counter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-right</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">mm</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc-level-1</span><span class="p">.</span><span class="nc">numbered-appendix</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h1</span><span class="nv">-appendix-counter</span><span class="p">,</span><span class="w"> </span><span class="kc">upper-alpha</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-right</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">mm</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">.</span><span class="nc">toc-level-2</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">12</span><span class="kt">pt</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-weight</span><span class="p">:</span><span class="w"> </span><span class="kc">bold</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">0.5</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc-level-2</span><span class="p">.</span><span class="nc">numbered</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h1</span><span class="nv">-counter</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h2</span><span class="nv">-counter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-right</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">mm</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="p">.</span><span class="nc">toc-level-2</span><span class="p">.</span><span class="nc">numbered-appendix</span><span class="w"> </span><span class="nt">a</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h1</span><span class="nv">-appendix-counter</span><span class="p">,</span><span class="w"> </span><span class="kc">upper-alpha</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h2</span><span class="nv">-counter</span><span class="p">);</span><span class="w"></span>
+<span class="w">    </span><span class="k">padding-right</span><span class="p">:</span><span class="w"> </span><span class="mi">5</span><span class="kt">mm</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+
+<span class="p">.</span><span class="nc">toc-level-3</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">font-size</span><span class="p">:</span><span class="w"> </span><span class="mi">10</span><span class="kt">pt</span><span class="p">;</span><span class="w"></span>
+<span class="w">    </span><span class="k">margin-top</span><span class="p">:</span><span class="w"> </span><span class="mf">0.4</span><span class="kt">em</span><span class="p">;</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<h3 id="include-items-in-toc">Include items in TOC</h3>
+<div class="highlight"><pre><span></span><code><span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;in-toc&quot;</span><span class="p">&gt;</span>Table of Contents<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span> <span class="cm">&lt;!-- note the missing class &quot;numbered&quot; --&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;in-toc numbered&quot;</span><span class="p">&gt;</span>Section 1<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;in-toc numbered&quot;</span><span class="p">&gt;</span>Subsection 1.1<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;in-toc numbered&quot;</span><span class="p">&gt;</span>Subsubsection 1.1.1<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;numbered&quot;</span><span class="p">&gt;</span>Section 2: Not in TOC<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h1</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;in-toc numbered-appendix&quot;</span><span class="p">&gt;</span>Appendix A<span class="p">&lt;/</span><span class="nt">h1</span><span class="p">&gt;</span>
+<span class="p">&lt;</span><span class="nt">h2</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;in-toc numbered-appendix&quot;</span><span class="p">&gt;</span>Appendix A.1<span class="p">&lt;/</span><span class="nt">h2</span><span class="p">&gt;</span>
+</code></pre></div>
+<h3 id="referencing-sections-in-text-outside-of-toc">Referencing sections in text (outside of TOC)</h3>
+<p>Headings can not only be referenced in the table of contents, but anywhere in the document.
+References can be added by creating an <code>&lt;a&gt;</code> tag that links to the <code>id</code> of an heading element.</p>
+<p>But there are some limitations in what you can reference: the nesting level cannot be determined automatically via CSS.
+You either have to manually specify the nesting level of the referenced heading or not include the heading number in the referenced text.</p>
+<div class="highlight"><pre><span></span><code><span class="c">/* Reference chapter title */</span><span class="w"></span>
+<span class="p">.</span><span class="nc">chapter-ref-title</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Chapter &quot;</span><span class="w"> </span><span class="nf">target-text</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+<span class="c">/* Reference appendix with number. It is assumed that all appendix subsections are on the same nesting level */</span><span class="w"></span>
+<span class="p">.</span><span class="nc">appendix-ref</span><span class="p">::</span><span class="nd">before</span><span class="w"> </span><span class="p">{</span><span class="w"></span>
+<span class="w">    </span><span class="k">content</span><span class="p">:</span><span class="w"> </span><span class="s2">&quot;Appendix &quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h1</span><span class="nv">-appendix-counter</span><span class="p">,</span><span class="w"> </span><span class="kc">upper-alpha</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot;.&quot;</span><span class="w"> </span><span class="nf">target-counter</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">),</span><span class="w"> </span><span class="n">h2</span><span class="nv">-counter</span><span class="p">)</span><span class="w"> </span><span class="s2">&quot; &quot;</span><span class="w"> </span><span class="nf">target-text</span><span class="p">(</span><span class="nb">attr</span><span class="p">(</span><span class="n">href</span><span class="p">));</span><span class="w"></span>
+<span class="p">}</span><span class="w"></span>
+</code></pre></div>
+<p>Example: reference static sections of the design
+<div class="highlight"><pre><span></span><code>Detailed descriptions of findings can be found in <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#findings&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;chapter-ref-title&quot;</span><span class="p">/&gt;</span>.
+
+A permission to attack (see <span class="p">&lt;</span><span class="nt">a</span> <span class="na">href</span><span class="o">=</span><span class="s">&quot;#appendix-pta&quot;</span> <span class="na">class</span><span class="o">=</span><span class="s">&quot;appendix-ref&quot;</span> <span class="p">/&gt;</span>) was ...
+</code></pre></div></p>
+<p><strong>Example:</strong> Reference findings in markdown</p>
+<ol>
+<li>
+<p>Get the finding ID from the URL</p>
+<ul>
+<li>Open the other finding that should be linked</li>
+<li>Copy the last UUID from the URL <img alt="Grab the finding ID" src="/images/finding_id.png" /></li>
+</ul>
+</li>
+<li>
+<p>Create a markdown link</p>
+<ul>
+<li>Set the <code>href</code> to <code>#&lt;copied-finding-id&gt;</code> </li>
+<li>Add the previously defined CSS class <code>.chapter-ref-title</code> to automatically add the finding title in the rendered text
+  <div class="highlight"><pre><span></span><code>See this other finding [](#&lt;finding-id&gt;){.chapter-ref-title} for...
+</code></pre></div></li>
+<li>If you want a different text for the link, do not add the class and write the link text yourself in the square brackets
+  <div class="highlight"><pre><span></span><code>See this other finding [<span class="nt">for more information</span>](<span class="na">#&lt;finding-id&gt;</span>)...
+</code></pre></div></li>
+</ul>
+</li>
+</ol>
 
   
   

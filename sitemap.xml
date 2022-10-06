@@ -2,142 +2,147 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://docs.sysreptor.com/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/data-privacy/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/license/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/roadmap/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/security-concerns/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/user-permissions/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/charts/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/debugging/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/design-guides/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/designer/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/figures/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/footnotes/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/formatting-utils/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/headings-and-table-of-contents/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/page-layout/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/security-concerns/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/designer/tables/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
+         <changefreq>daily</changefreq>
+    </url>
+    <url>
+         <loc>https://docs.sysreptor.com/reporting/locking/</loc>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/reporting/markdown-features/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://docs.sysreptor.com/reporting/writing-findings/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <loc>https://docs.sysreptor.com/reporting/referencing-sections/</loc>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-attackforge-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-dradis-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-hexway-hive-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-plextrac-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-pwndoc-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-reconmap-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-serpico-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/alternative-to-writehat-reporting-tool/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
     <url>
          <loc>https://docs.sysreptor.com/s/pentest-reporting-tools/</loc>
-         <lastmod>2022-09-29</lastmod>
+         <lastmod>2022-10-06</lastmod>
          <changefreq>daily</changefreq>
     </url>
 </urlset>
