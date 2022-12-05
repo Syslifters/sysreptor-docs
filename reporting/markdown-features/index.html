@@ -15,7 +15,7 @@
       
       
       <link rel="icon" href="../../assets/images/favicon.png">
-      <meta name="generator" content="mkdocs-1.3.1, mkdocs-material-8.5.3+insiders-4.23.5">
+      <meta name="generator" content="mkdocs-1.4.0, mkdocs-material-8.5.6+insiders-4.25.4">
     
     
       
@@ -23,7 +23,7 @@
       
     
     
-      <link rel="stylesheet" href="../../assets/stylesheets/main.fb3608a7.min.css">
+      <link rel="stylesheet" href="../../assets/stylesheets/main.fa1d38d9.min.css">
       
         
         <link rel="stylesheet" href="../../assets/stylesheets/palette.cbb835fc.min.css">
@@ -38,7 +38,7 @@
         
         
         
-        <link rel="stylesheet" href="../../.cache/plugin/privacy/fonts.googleapis.com/css.css">
+        <link rel="stylesheet" href="../../assets/externals/fonts.googleapis.com/css.css">
         <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
       
     
@@ -222,6 +222,7 @@
     
   </span>
   
+  
 
       </a>
     </li>
@@ -241,6 +242,7 @@
     User Permissions
     
   </span>
+  
   
 
       </a>
@@ -272,6 +274,7 @@
     Reporting
     
   </span>
+  
   
 
             <span class="md-nav__icon md-icon"></span>
@@ -307,6 +310,7 @@
     
   </span>
   
+  
 
           <span class="md-nav__icon md-icon"></span>
         </label>
@@ -318,6 +322,7 @@
     Markdown Syntax
     
   </span>
+  
   
 
       </a>
@@ -383,6 +388,15 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#code-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code blocks
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#html-attributes" class="md-nav__link">
     <span class="md-ellipsis">
       HTML Attributes
@@ -423,6 +437,7 @@
     
   </span>
   
+  
 
       </a>
     </li>
@@ -443,6 +458,7 @@
     Locked Findings & Sections
     
   </span>
+  
   
 
       </a>
@@ -481,6 +497,7 @@
     
   </span>
   
+  
 
             <span class="md-nav__icon md-icon"></span>
           </label>
@@ -506,6 +523,7 @@
     
   </span>
   
+  
 
       </a>
     </li>
@@ -526,6 +544,7 @@
     Headings and ToC
     
   </span>
+  
   
 
       </a>
@@ -548,6 +567,7 @@
     
   </span>
   
+  
 
       </a>
     </li>
@@ -568,6 +588,7 @@
     Figures
     
   </span>
+  
   
 
       </a>
@@ -590,6 +611,29 @@
     
   </span>
   
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../designer/charts/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Charts
+    
+  </span>
+  
+  
 
       </a>
     </li>
@@ -610,6 +654,29 @@
     Design Guides
     
   </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../../designer/formatting-utils/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Formatting Utilities
+    
+  </span>
+  
   
 
       </a>
@@ -632,26 +699,6 @@
     
   </span>
   
-
-      </a>
-    </li>
-  
-
-              
-            
-              
-                
-  
-  
-  
-    <li class="md-nav__item">
-      <a href="../../designer/security-concerns/" class="md-nav__link">
-        
-  
-  <span class="md-ellipsis">
-    Security Concerns
-    
-  </span>
   
 
       </a>
@@ -673,6 +720,27 @@
   
   
     <li class="md-nav__item">
+      <a href="../../designer/security-considerations.md" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Security Considerations
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+    <li class="md-nav__item">
       <a href="../../roadmap/" class="md-nav__link">
         
   
@@ -680,6 +748,7 @@
     Development Roadmap
     
   </span>
+  
   
 
       </a>
@@ -753,6 +822,15 @@
   <a href="#tables" class="md-nav__link">
     <span class="md-ellipsis">
       Tables
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#code-blocks" class="md-nav__link">
+    <span class="md-ellipsis">
+      Code blocks
     </span>
   </a>
   
@@ -860,8 +938,8 @@ Links: [<span class="nt">Example Link</span>](<span class="na">https://example.c
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span></pre></div></td><td class="code"><div><pre><span></span><code>Text text^[footnote content] text.
 </code></pre></div></td></tr></table></div>
 <h2 id="tables">Tables</h2>
-<p>For tables the <a href="https://fletcher.github.io/MultiMarkdown-6/syntax/tables.html" target="_blank">MultiMarkdown syntax</a> is used.
-This syntax supports table captions, grouping rows rows and cols to span multiple cells.</p>
+<p>For tables the GFM-like table syntax is used.
+This syntax is extended to support table captions.</p>
 <div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
 <span class="normal">2</span>
 <span class="normal">3</span>
@@ -872,6 +950,70 @@ This syntax supports table captions, grouping rows rows and cols to span multipl
 
 : table caption
 </code></pre></div></td></tr></table></div>
+<h2 id="code-blocks">Code blocks</h2>
+<p>Code blocks allow including source code and highlight it.</p>
+<p>The following example shows how to apply syntax highlighting to a HTTP request.
+Many other programming languages are also supported.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code><span class="sb">```http</span>
+<span class="nf">POST</span> <span class="nn">/login.php</span> <span class="kr">HTTP</span><span class="o">/</span><span class="m">1.1</span>
+<span class="na">Host</span><span class="o">:</span> <span class="l">sqli.example.com</span>
+<span class="na">Content-Type</span><span class="o">:</span> <span class="l">application/x-www-form-urlencoded</span>
+<span class="na">Content-Length</span><span class="o">:</span> <span class="l">33</span>
+
+username=&#39;or&#39;1&#39;=&#39;1&amp;password=dummy
+<span class="sb">```</span>
+</code></pre></div></td></tr></table></div></p>
+<p>Syntax highlighting is great for readability, but it only highlights predefined keywords of the specified language.
+However, it does not allow to manually highlight certain text parts to draw the readers attention to it.</p>
+<p>You can enable manual highlighting by adding code-block meta attribute <code>highlight-manual</code>. 
+It is now possible to encapsulate highlighted areas with <code>§§highlighted content§§</code>.
+In the rendered HTML code, the content inside the two <code>§§</code>-placeholders is wrapped by a HTML <code>&lt;mark&gt;</code> tag.
+This works in combination with language-based syntax highlighting.</p>
+<p>This example highlights the vulnerable POST-parameter <code>username</code> in the HTTP body.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>```http highlight-manual
+POST /login.php HTTP/1.1
+Host: sqli.example.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 33
+
+§§username=&#39;or&#39;1&#39;=&#39;1§§&amp;password=dummy
+```
+</code></pre></div></td></tr></table></div></p>
+<p>If you need more advanced highlighting, you can place cutom HTML code inside the <code>§§</code> placeholders e.g. <code>§&lt;mark&gt;&lt;em&gt;&lt;span class="custom-highlight"&gt;§</code>.
+If your code snippet includes <code>§</code>-characters, you cannot use them as escape characters for manual highlighting. 
+It is possible to specify a different escaple character via the <code>highlight-manual="&lt;escape-character&gt;"</code> attribute.
+Make sure that the escape character is not present in the code block.</p>
+<p>The following example uses <code>"|"</code> as escape character and a custom HTML markup for highlighting.
+<div class="highlight"><table class="highlighttable"><tr><td class="linenos"><div class="linenodiv"><pre><span></span><span class="normal">1</span>
+<span class="normal">2</span>
+<span class="normal">3</span>
+<span class="normal">4</span>
+<span class="normal">5</span>
+<span class="normal">6</span>
+<span class="normal">7</span>
+<span class="normal">8</span></pre></div></td><td class="code"><div><pre><span></span><code>```http highlight-manual=&quot;|&quot;
+POST /login.php HTTP/1.1
+Host: sqli.example.com
+Content-Type: application/x-www-form-urlencoded
+Content-Length: 33
+
+|&lt;mark&gt;&lt;em&gt;&lt;span class=&quot;custom-highlight&quot;&gt;|username=&#39;or&#39;1&#39;=&#39;1|&lt;/span&gt;&lt;/em&gt;&lt;/mark&gt;|&amp;password=dummy
+```
+</code></pre></div></td></tr></table></div></p>
 <h2 id="html-attributes">HTML Attributes</h2>
 <p>This extension allows you to set HTML attributes from markdown.
 Place attributes in curly braces directly after the targeted element (without spaces between). 
@@ -1006,7 +1148,7 @@ Text with [<span class="nt">styled link</span>](<span class="na">https://example
     <script id="__config" type="application/json">{"base": "../..", "features": ["content.code.annotate"], "search": "../../assets/javascripts/workers/search.720157f5.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.config.lang": "en", "search.config.pipeline": "stopWordFilter", "search.config.separator": "[\\s\\-]+", "search.placeholder": "Search", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version.title": "Select version"}}</script>
     
     
-      <script src="../../assets/javascripts/bundle.0d3e07ec.min.js"></script>
+      <script src="../../assets/javascripts/bundle.abceede4.min.js"></script>
       
     
   </body>
