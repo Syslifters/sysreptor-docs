@@ -663,18 +663,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#server-side-request-forgery" class="md-nav__link">
+  <a href="#denial-of-service" class="md-nav__link">
     <span class="md-ellipsis">
-      Server-Side Request Forgery
+      Denial of Service
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#denial-of-service" class="md-nav__link">
+  <a href="#server-side-request-forgery-prevention" class="md-nav__link">
     <span class="md-ellipsis">
-      Denial of Service
+      Server-Side Request Forgery Prevention
     </span>
   </a>
   
@@ -745,18 +745,18 @@
 </li>
       
         <li class="md-nav__item">
-  <a href="#server-side-request-forgery" class="md-nav__link">
+  <a href="#denial-of-service" class="md-nav__link">
     <span class="md-ellipsis">
-      Server-Side Request Forgery
+      Denial of Service
     </span>
   </a>
   
 </li>
       
         <li class="md-nav__item">
-  <a href="#denial-of-service" class="md-nav__link">
+  <a href="#server-side-request-forgery-prevention" class="md-nav__link">
     <span class="md-ellipsis">
-      Denial of Service
+      Server-Side Request Forgery Prevention
     </span>
   </a>
   
@@ -785,7 +785,15 @@ This allows template injection attackers.</p>
 <p>The template injection is sandboxed in a dedicated Chromium process in the main Docker container. 
 Chromium is running in offline mode. It has no possibility to connect to remote locations. 
 It requires an exploit in the Chromium browser to get access to the container and the application.</p>
-<h2 id="server-side-request-forgery">Server-Side Request Forgery</h2>
+<h2 id="denial-of-service">Denial of Service</h2>
+<p>PDF rendering is a long-running and resource intensive process.
+Especially WeasyPrint can sometimes be slow when rendering long and complex reports. </p>
+<p>Denial of Service is possible by injecting long-running JavaScript in the Vue template or by using long-running HTML and CSS in WeasyPrint.</p>
+<p>The Vue template rendering process is aborted if it takes longer than a certain time.</p>
+<p>Currently, no DoS prevention is implemented for WeasyPrint.
+For now we accept the risk of DoS in WeasyPrint, since we do not want to prevent rendering long and complex reports which might take some time and system resources.
+This behavior might change in the future.</p>
+<h2 id="server-side-request-forgery-prevention">Server-Side Request Forgery Prevention</h2>
 <p>All Requests to external systems from within the rendering workflow are blocked.
 This prevents data exfiltration to external systems if attackers inject templates or if there are vulnerabilities in third-party JS libraries.</p>
 <p>This is ensured by two measures:</p>
@@ -796,14 +804,6 @@ This prevents data exfiltration to external systems if attackers inject template
   No HTTP requests are involved when including this resources (neither to localhost), 
   but a custom handler that returns the resources as data following the <a href="https://doc.courtbouillon.org/weasyprint/stable/first_steps.html#security" target="_blank">WeasyPrint security recommendations</a>.</li>
 </ul>
-<h2 id="denial-of-service">Denial of Service</h2>
-<p>PDF rendering is a long-running and resource intensive process.
-Especially WeasyPrint can sometimes be slow when rendering long and complex reports. </p>
-<p>Denial of Service is possible by injecting long-running JavaScript in the Vue template or by using long-running HTML and CSS in WeasyPrint.</p>
-<p>The Vue template rendering process is aborted if it takes longer than a certain time.</p>
-<p>Currently, no DoS prevention is implemented for WeasyPrint.
-For now we accept the risk of DoS in WeasyPrint, since we do not want to prevent rendering long and complex reports which might take some time and system resources.
-This behavior might change in the future.</p>
 
   
   
