@@ -36,11 +36,6 @@
          <changefreq>daily</changefreq>
     </url>
     <url>
-         <loc>https://docs.sysreptor.com/roadmap/</loc>
-         <lastmod>2023-01-12</lastmod>
-         <changefreq>daily</changefreq>
-    </url>
-    <url>
          <loc>https://docs.sysreptor.com/security-considerations/</loc>
          <lastmod>2023-01-12</lastmod>
          <changefreq>daily</changefreq>
