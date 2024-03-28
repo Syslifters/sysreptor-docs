@@ -1,0 +1,15 @@
+usage: reptor template [-h] [--list] [--search SEARCH] [--language LANGUAGE]
+                       [--export {tar.gz,json,yaml,plain}] [-o FILENAME]
+
+Queries Finding Templates from SysReptor
+
+optional arguments:
+  -h, --help            show this help message and exit
+  -o FILENAME, --output FILENAME
+                        Filename for output
+
+  --list                List all finding templates
+  --search SEARCH       Search for term
+  --language LANGUAGE   Template language for export format "plain", e.g. "en"
+  --export {tar.gz,json,yaml,plain}
+                        Export templates
