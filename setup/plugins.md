@@ -1,0 +1,568 @@
+---
+url: https://docs.sysreptor.com/setup/plugins.md
+---
+# Plugins
+
+SysReptor provides a plugin system to extend the functionality of the application without modifying the SysReptor core code.
+Plugins can hook into the SysReptor core and provide additional features both in the API and the web UI.
+
+All plugins are disabled by default.
+Enable plugins in the application settings web interface (https://sysreptor.example.com/settings/) by ticking plugin enabled checkboxes.
+
+You can also enable plugins by setting [`ENABLED_PLUGINS`](/setup/configuration#plugins) in `app.env` (e.g. `ENABLED_PLUGINS=cyberchef,checkthehash`) and restarting your container (`docker compose up -d` from the `deploy` directory). If `ENABLED_PLUGINS` is set in `app.env`, it takes precedence and the Settings UI will be read-only for plugin enable/disable.
+
+## Official Plugins
+
+&#x20;
+
+Official plugins are maintained by the SysReptor team and are shipped inside official docker images.
+
+| Plugin | Description |     |
+| ------ | ----------- | --- |
+| [cyberchef](https://github.com/Syslifters/sysreptor/tree/main/plugins/cyberchef) | CyberChef integration | |
+| [graphqlvoyager](https://github.com/Syslifters/sysreptor/tree/main/plugins/graphqlvoyager) | GraphQL Voyager integration | |
+| [checkthehash](https://github.com/Syslifters/sysreptor/tree/main/plugins/checkthehash) | Hash identifier | |
+| [customizetheme](https://github.com/Syslifters/sysreptor/tree/main/plugins/customizetheme) | Customize UI themes per instance | |
+| [demoplugin](https://github.com/Syslifters/sysreptor/tree/main/plugins/demoplugin) | A demo plugin that demonstrates the plugin system | |
+| [markdownexport](https://github.com/Syslifters/sysreptor/tree/main/plugins/markdownexport) | Export reports as Markdown documents in ZIP format | |
+| [projectnumber](https://github.com/Syslifters/sysreptor/tree/main/plugins/projectnumber) | Automatically adds an incremental project number to new projects | |
+| [webhooks](https://github.com/Syslifters/sysreptor/tree/main/plugins/webhooks) | Send webhooks on certain events |  |
+| [renderfindings](https://github.com/Syslifters/sysreptor/tree/main/plugins/renderfindings) | Render selected findings to pdf |  |
+| [rendersections](https://github.com/Syslifters/sysreptor/tree/main/plugins/rendersections) | Render single sections to PDF |  |
+| [scanimport](https://github.com/Syslifters/sysreptor/tree/main/plugins/scanimport) | Import scan results from various tools |  |
+| [jira](https://github.com/Syslifters/sysreptor/tree/main/plugins/jira) | Export findings to Jira issues |  |
+
+## Developing Custom Plugins
+
+It is possible to develop and load custom plugins to extend the functionality of SysReptor.
+Custom plugins are only supported in self-hosted installations, but not in the cloud version.
+
+### Getting Started
+
+We recommend to develop and manage custom plugins in a separate Git repository, not in the SysReptor repository.
+You can use our [example plugin repository](https://github.com/Syslifters/sysreptor-plugin-example) as a starting point.
+
+First, you need to set up a new repository (either on GitHub or your internal version control system) with a directory structure similar to:
+
+```
+plugin-repository
+├── .gitignore
+├── .dockerignogre
+├── Dockerfile
+├── sysreptor.docker-compose.override.yml
+├── custom_plugins/
+│   ├── myplugin1/
+│   │   ├── __init__.py
+│   │   ├── apps.py
+│   │   ├── models.py
+│   │   ├── urls.py
+│   │   ├── views.py
+│   │   ├── serializers.py
+│   │   ├── signals.py
+│   │   ├── ...other .py files
+│   │   ├── tests/
+│   │   │   ├── __init__.py
+│   │   │   ├── test_myplugin1.py
+│   │   ├── migrations/
+│   │   │   ├── __init__.py
+│   │   │   └── ...auto-generated migrations
+│   │   └── static/
+│   │       ├── plugin.js
+│   │       └── ...other HTML, CSS, JS assets
+│   ├── myplugin2/
+│   │   └── ...
+│   └── ...additional plugins
+└── ...additional top-level files
+```
+
+We recommend to create a parent directory that contains all your custom plugins (e.g. `custom_plugins`).
+Plugin directories should contain a valid SysReptor plugin structure that can be loaded by the SysReptor core.
+Use [demoplugin](https://github.com/Syslifters/sysreptor/tree/main/plugins/demoplugin) as a starting point.
+
+::: info Use a unique `plugin_id` and module name.
+When copying an existing plugin, make sure to change the module (plugin directory) name
+and to change the `plugin_id` in `apps.py`.
+:::
+
+### Plugin Loading
+
+Custom plugins need to be made available to the SysReptor docker container.
+This can be achieved by extending the SysReptor docker image and adding your custom plugins to the image.
+
+```dockerfile title="Dockerfile example"
+ARG SYSREPTOR_VERSION="latest"
+
+# Optional build stage for frontend assets
+FROM node:24-alpine3.22 AS plugin-builder
+# Build frontend assets
+COPY custom_plugins /custom_plugins
+RUN cd /custom_plugins/myplugin1/frontend && npm install && npm run generate
+
+# Extend the Sysreptor image with custom plugins
+FROM syslifters/sysreptor:${SYSREPTOR_VERSION}
+# Optional: install additional dependencies
+# RUN pip install ...
+ENV PLUGIN_DIRS=${PLUGIN_DIRS},/custom_plugins
+COPY --from=plugin-builder /custom_plugins /custom_plugins
+```
+
+Use following code snippets to plug your extended docker image to the SysReptor docker-compose file:
+
+::: info
+Directly modifying `sysreptor/deploy/sysreptor/docker-compose.yml` is not recommended, because changes might get overwritten during [updates](/setup/updates).
+The presented way is compatible with the `update.sh` script.
+:::
+
+First, modify `sysreptor/deploy/docker-compose.yml` to add an include docker compose include file.
+
+```yaml title="sysreptor/deploy/docker-compose.yml"
+name: sysreptor
+
+include:
+  - path:
+      - sysreptor/docker-compose.yml
+      # Path to sysreptor.docker-compose.override.yml in your plugin repository
+      # Note: Path is relative to sysreptor/deploy/docker-compose.yml (or an absolute path)
+      - ../../plugin-repository/sysreptor.docker-compose.override.yml
+```
+
+The content of `../../plugin-repository/sysreptor.docker-compose.override.yml` is merged with the original `sysreptor/docker-compose.yml` (from SysReptor core)
+and allows extending or overriding docker compose configurations.
+See https://docs.docker.com/reference/compose-file/include/ for more information about docker compose includes.
+
+Then, override the `image` and `build` options in `sysreptor.docker-compose.override.yml` to use your extended SysReptor docker image with custom plugins included.
+Note that paths in this file are relative to the `sysreptor/deploy` directory (from SysReptor core docker compose file).
+
+```yaml title="sysreptor.docker-compose.override.yml example"
+services:
+  app:
+    # Override the docker image
+    image: !reset null
+    build: 
+      # Note: Path is relative to sysreptor/deploy/docker-compose.yml (or an absolute path)
+      context: ../../plugin-repository
+      args:
+        SYSREPTOR_VERSION: ${SYSREPTOR_VERSION:-latest}
+```
+
+### Server-side Plugin
+
+SysReptor plugins are Django apps can hook into the SysReptor core and provide additional functionality.
+See the [Django documentation](https://docs.djangoproject.com/en/stable/ref/applications/) and [Django app tutorial](https://docs.djangoproject.com/en/stable/intro/tutorial01/) for more information about Django apps.
+
+Each plugin needs at least an `__init__.py` and `apps.py` file with a minimal plugin configuration.
+Use the [demoplugin](https://github.com/Syslifters/sysreptor/tree/main/plugins/demoplugin) as a starting point.
+
+```py
+import logging
+
+# Import the necessary classes. 
+# Official plugin APIs are provided by the "sysreptor.plugins" module.
+# Other "sysreptor.*" modules are considered internal and might change any time. It is still possible to use them, though.
+from sysreptor.plugins import FieldDefinition, PluginConfig, StringField, configuration
+
+log = logging.getLogger(__name__)
+
+
+class DemoPluginConfig(PluginConfig):
+    """
+    This is a demo plugin that demonstrates the plugin system.
+    Use this plugin as a reference to develop your own plugins.
+
+    This doc string is used as the plugin description in the settings page.
+    """
+
+    # When writing a new plugin, generate a new plugin ID via `python3 -m uuid`
+    plugin_id = 'db365aa0-ed36-4e90-93b6-a28effc4ed47'
+
+    configuration_definition = FieldDefinition(fields=[
+        StringField(
+            id='PLUGIN_DEMOPLUGIN_SETTING',
+            default='default value',
+            help_text='Here you can define available plugin settings. '
+                      'Settings can be configured as environment variables or via the API (stored in database). '
+                      'It is recommended to follow the nameing convention "PLUGIN_<PLUGIN_NAME>_<SETTING_NAME>".'),
+    ])
+
+    def ready(self) -> None:
+        # Perform plugin initialization
+        # e.g. register signal handlers, do some monkey patching, etc.
+        log.info('Loading DemoPlugin...')
+
+        from . import signals  # noqa
+
+    def get_frontend_settings(self, request):
+        # Pass settings to JavaScript frontend.
+        # Use the value of the setting defined in configuration_definition.
+        return {
+            'setting_value': configuration.PLUGIN_DEMOPLUGIN_SETTING,
+        }
+
+```
+
+Besides `apps.py`, you can add arbitrary Python files to the plugin directory to structure your plugin code.
+We recommend to stick to the Django app structure:
+
+* `models.py` for database model classes
+* `migrations/` directory for database migrations
+* `admin.py` for Django admin configuration for your models
+* `urls.py` for URL routing: URLs in variable `urlpatterns` are registered at `/api/plugins/<plugin_id>/api/...`
+* `views.py` for API views e.g. [Django REST framework](https://www.django-rest-framework.org/) viewsets
+* `serializers.py` for Django REST framework serializers
+* `signals.py` for signal handlers listening to Django or SysReptor signals
+* `static/` directory for static assets (e.g. JS, CSS, images): served at `/static/plugins/<plugin_id>/...`
+  * `plugin.js` is the entrypoint for frontend plugins
+* `tests/` directory for unit tests (highly recommended)
+
+#### Python Imports and Dependencies
+
+You are able to import and reuse modules from SysReptor core as well as other third-party libraries that are installed in the server's python environment (e.g. django).
+Please note that the SysReptor core and third-party libraries are subject to change and updates, so be aware of potential breaking changes when importing internal modules.
+In order to detect breaking changes early, we recommend writing [unit tests](#testing) for your plugin code.
+
+When importing modules from your own plugin, prefer relative imports over absolute imports.
+
+```python title="imports example"
+# Prefer relative imports
+from .models import DemoPluginModel
+# over absolute imports
+from sysreptor_plugins.demoplugin.models import DemoPluginModel
+```
+
+Plugins are able to reuse existing third-party libraries that are installed in the server's python environment.
+If you need to install additional dependencies, you need to extend the `Dockerfile` and install the dependencies via `pip`.
+
+#### Database models
+
+If your plugin needs to store data in the database, you can define Django models in `models.py`.
+You also need to create database migrations for your models to create/update the database schema.
+SysReptor automatically applies plugin migrations on startup if the plugin is enabled
+and also includes plugin models in [backups and restores](/setup/backups).
+
+Here are the basic steps to create a Django models:
+
+* Define your django model classes in `models.py`
+* Create a `migrations/` directory and `migrations/__init__.py` file
+* Ensure your plugin is loaded and enabled
+* Run `docker compose run --rm app python3 manage.py makemigrations` to create the initial migration files
+* Run `docker compose run --rm api python3 manage.py migrate` to apply the migrations
+
+See the Django documentation for more information:
+
+* https://docs.djangoproject.com/en/stable/topics/db/models/
+* https://docs.djangoproject.com/en/stable/topics/migrations/
+
+#### API Endpoints
+
+You can define API endpoints in your plugin by defining API views in `views.py` and registering them in URL patterns to `urls.py`.
+
+```py
+from django.http import HttpResponse
+from django.urls import include, path
+from rest_framework.routers import DefaultRouter
+
+from .consumers import DemoPluginConsumer
+from .views import DemoPluginModelViewSet
+
+router = DefaultRouter()
+router.register('demopluginmodels', DemoPluginModelViewSet, basename='demopluginmodel')
+
+
+"""
+API endpoints defined by plugin.
+Accessible at /api/plugins/<plugin_id>/api/...
+"""
+urlpatterns = [
+    path('helloworld/', lambda *args, **kwargs: HttpResponse("Hello world", content_type="text/plain"), name='helloworld'),
+    path('', include(router.urls)),
+]
+
+
+"""
+WebSocket consumers defined by plugin.
+Accessible at /api/plugins/<plugin_id>/ws/...
+"""
+websocket_urlpatterns = [
+    path('projects/<uuid:project_pk>/hellowebsocket/', DemoPluginConsumer.as_asgi(), name='hellowebsocket'),
+]
+
+
+
+```
+
+API views can be implemented as Django views or [Django REST framework](https://www.django-rest-framework.org/) viewsets.
+
+```py
+from rest_framework import viewsets
+
+from .models import DemoPluginModel
+from .serializers import DemoPluginModelSerializer
+
+
+class DemoPluginModelViewSet(viewsets.ModelViewSet):
+    """
+    API viewset for DemoPluginModel providing CRUD operations.
+    See https://www.django-rest-framework.org/api-guide/viewsets/
+    """
+    queryset = DemoPluginModel.objects.all()
+    serializer_class = DemoPluginModelSerializer
+
+```
+
+Django REST framework uses serializers to serialize and deserialize data between Python objects and JSON.
+Define your serializers in `serializers.py`.
+
+```py
+from rest_framework import serializers
+
+from .models import DemoPluginModel
+
+
+class DemoPluginModelSerializer(serializers.ModelSerializer):
+    """
+    Serializers specify how to convert model instances into JSON and vice versa.
+    See: https://www.django-rest-framework.org/api-guide/serializers/
+         https://www.django-rest-framework.org/api-guide/fields/
+    """
+
+    class Meta:
+        model = DemoPluginModel
+        fields = ['id', 'created', 'updated', 'name']
+
+
+```
+
+#### Signals
+
+Plugins can listen to [Django signals](https://docs.djangoproject.com/en/stable/topics/signals/) to react to certain events in the SysReptor core.
+SysReptor provides additional signals that are not part of Django in the `sysreptor.signals` module.
+
+Signal handlers should be defined in your plugin's `signals.py` file.
+In order to load the signal handlers, you need to register them in the `ready()` method of your plugin's `apps.py`.
+
+```python title="apps.py example"
+class DemoPluginConfig(PluginConfig):
+    def ready(self):
+        from . import signals  # noqa
+```
+
+```py
+
+import logging
+
+from django.dispatch import receiver
+from sysreptor.pentests.models import PentestProject
+from sysreptor import signals as sysreptor_signals
+
+log = logging.getLogger(__name__)
+
+# Register django signal handlers
+# https://docs.djangoproject.com/en/stable/topics/signals/
+
+@receiver(sysreptor_signals.post_update, sender=PentestProject)
+def on_project_updated(sender, instance, changed_fields, *args, **kwargs):
+    """
+    Signal handler for project save event.
+    """
+    if 'name' in changed_fields:
+        old_name, new_name = instance.get_field_diff('name')
+        log.info(f'Someone renamed project "{old_name}" to "{new_name}"')
+
+
+```
+
+#### Testing
+
+We highly recommend writing unit tests for your plugins.
+Unit tests ensure that
+
+* your plugins work as expected and help in detecting breaking changes early
+* detect when updates of SysReptor core break your plugins
+* detect when your plugins break SysReptor core (especially when using signal handlers)
+
+Unit tests should be placed in the `tests/` directory of your plugin.
+[`pytest`](https://docs.pytest.org/en/stable/) and [`pytest-django`](https://pytest-django.readthedocs.io/en/latest/) are available in the SysReptor container and can be used to run your tests.
+
+```py
+"""
+Unit tests for plugin functionality.
+
+To run this test, execute the following command:
+cd sysreptor/dev
+docker compose run --rm -e ENABLED_PLUGINS=demoplugin api pytest --pyargs sysreptor_plugins.demoplugin
+"""
+
+import pytest
+from django.urls import reverse
+from sysreptor.tests.mock import (
+    api_client,
+    create_user,
+)
+
+from ..apps import DemoPluginConfig
+from ..models import DemoPluginModel
+
+PLUGIN_ID = DemoPluginConfig.plugin_id
+URL_NAMESPACE = DemoPluginConfig.label
+
+
+@pytest.mark.django_db()
+class TestDemoPluginApi:
+    @pytest.fixture(autouse=True)
+    def setUp(self):
+        self.user = create_user()
+        self.client = api_client(self.user)
+        self.demopluginmodel = DemoPluginModel.objects.create(name='Test')
+
+    def test_retrieve(self):
+        res = self.client.get(reverse(URL_NAMESPACE + ':demopluginmodel-detail', kwargs={'pk': self.demopluginmodel.id}))
+        assert res.status_code == 200
+        assert res.data['id'] == str(self.demopluginmodel.id)
+        assert res.data['name'] == self.demopluginmodel.name
+
+    def test_create(self):
+        res = self.client.post(reverse(URL_NAMESPACE + ':demopluginmodel-list'), data={'name': 'New'})
+        assert res.status_code == 201
+        obj = DemoPluginModel.objects.get(id=res.data['id'])
+        assert obj.name == 'New'
+
+    def test_update(self):
+        res = self.client.patch(reverse(URL_NAMESPACE + ':demopluginmodel-detail', kwargs={'pk': self.demopluginmodel.id}), data={'name': 'Updated'})
+        assert res.status_code == 200
+        self.demopluginmodel.refresh_from_db()
+        assert self.demopluginmodel.name == 'Updated'
+
+    def test_delete(self):
+        res = self.client.delete(reverse(URL_NAMESPACE + ':demopluginmodel-detail', kwargs={'pk': self.demopluginmodel.id}))
+        assert res.status_code == 204
+        assert not DemoPluginModel.objects.filter(id=self.demopluginmodel.id).exists()
+
+```
+
+Run unit tests:
+
+```shell
+# Test a single plugin
+docker compose run --rm -e ENABLED_PLUGINS=demoplugin app pytest --pyargs sysreptor_plugins.demoplugin
+# Test all plugins
+docker compose run --rm app pytest --pyargs sysreptor_plugins
+# Run all tests (core + all plugins)
+docker compose run --rm app pytest -n auto
+```
+
+### Frontend Plugin
+
+Frontend plugins hook into the SysReptor web UI (single page application) and can register new menu entries and pages.
+
+#### Frontend Plugin Entrypoint
+
+Frontend plugins are loaded from the `/static/` directory and need to provide pre-built assets.
+The entrypoint for frontend plugins is `plugin.js` in the `static/` directory.
+`plugin.js` should perform setup actions for the frontend plugin, e.g. registering new menu entries and pages.
+
+```js
+/**
+ * This is the plugin frontend entry point.
+ * It is called once while loading the single page application in the client's browser.
+ * Register plugin routes here and perform initializations.
+ */
+export default function (options) {
+  // Register a new route and add it to the main menu
+  options.pluginHelpers.addRoute({
+    scope: 'main',
+    route: {
+      // Relative path, prefixed with "/plugins/<plugin_id>/"
+      path: 'demopluginmodels',  
+      // Load frontend pages in iframe
+      component: () => options.pluginHelpers.iframeComponent({ 
+        // Relative path to "/static/plugins/<plugin_id>/" => load "index.html" from the plugin's static directory
+        src: 'index.html#/demopluginmodels',  
+      }),
+    },
+    menu: {
+      title: 'Demo Plugin',
+    }
+  });
+  // Register a sub-page
+  options.pluginHelpers.addRoute({
+    scope: 'main',
+    route: {
+      // Add a path parameter "demopluginmodelId" to the route
+      path: 'demopluginmodels/:demopluginmodelId()', 
+      // and pass it to the iframe URL
+      component: () => options.pluginHelpers.iframeComponent(({ route }) => ({
+        src: `index.html#/demopluginmodels/${route.params.demopluginmodelId}`
+      })),
+    },
+    menu: undefined,  // Do not add this route to the main menu
+  });
+
+  // Register a per-project route and add it to the project menu
+  options.pluginHelpers.addRoute({
+    scope: 'project',
+    route: {
+      // Prefixed with /projects/<projectId>/plugins/<plugin_id>/
+      path: '',
+      component: () => options.pluginHelpers.iframeComponent(({ route }) => ({
+        src: `index.html#/projects/${route.params.projectId}/`,
+      }))
+    },
+    menu: {
+      title: 'Demo Plugin',
+    },
+  });
+}
+
+```
+
+Plugins can register new pages in the SysReptor web UI via `options.pluginHelpers.addRoute()`.
+Pages are loaded in `iframes` to provide the most flexibility for loaded content.
+HTML files loaded as `iframes` as well as any other assets (e.g. JS, CSS, images) should be placed in the `static/` directory.
+
+The SysReptor web application uses session cookies for authentication, so you are able to access the SysReptor API from within plugin `iframes`.
+
+#### Vue/Nuxt Pages
+
+SysReptor provides some Vue/Nuxt UI components to be reused in plugins to ensure a consistent look and feel.
+For that, you need to introduce an additional build step to compile your Vue/Nuxt pages into static assets that can be loaded in `iframes`.
+We recommend to place your Vue/Nuxt code in the `frontend/` directory of your plugin and write output files to the `static/` directory.
+
+SysReptor provides the [Nuxt Layer](https://nuxt.com/docs/getting-started/layers) `plugin-base-layer`.
+This layer contains basic plugin configurations and UI components that can be used in plugins.
+The source code of this layer is located in the main SysReptor repository and needs to be included during the build step (e.g. via git submodule).
+See https://github.com/Syslifters/sysreptor-plugin-example/tree/main/custom\_plugins/myplugin1/frontend for an example setup.
+
+To build the frontend assets, you need to run the following commands:
+
+```shell
+cd demoplugin/frontend
+# Install JS dependencies
+npm install
+# Build the frontend assets
+npm run generate
+```
+
+Here are some notes to get you started:
+
+* See the [Nuxt documentation](https://nuxt.com/) for the basic setup and configuration
+* URLs to other SysReptor pages (also from the same plugin):
+  * use full paths with plugin ID
+  * e.g. `/plugins/${pluginId}/...` or `/projects/${projectId}/plugins/${pluginId}/...`
+* navigate to other SysReptor pages:
+  * from inside plugin `iframes` you need to perform a top-level navigation to not load the page inside the `iframe`
+  * set `<a href="..." target="_top">` or use `await navigateTo(..., { open: { target: "_top" } })`
+* fetch data from plugin API:
+  * use full URLs with plugin ID
+  * e.g. `/api/plugins/${pluginId}/api/...`
+* importing components:
+  * components (from nuxt-base-layer and local component) are auto-imported
+  * if you want to import them explicitely use `import { ... } from '#components'`
+  * composables, utilities, etc. (from nuxt-base-layer and local) can be imported via `import { ... } from '#imports'`
+
+::: info&#x20;
+
+Need help or have questions? Get support and connect with us and the SysReptor community.
+
+[Get help](https://github.com/Syslifters/sysreptor/discussions/categories/q-a)
+
+:::

@@ -1,0 +1,192 @@
+# Pentest Reporting Easy as Pie
+
+> This is the official hosting and usage documentation of the pentest reporting tool SysReptor.
+
+## Table of Contents
+
+### Setup
+
+- [Projects](https://docs.sysreptor.com/setup/installation.md)
+- [Configuration](https://docs.sysreptor.com/setup/configuration.md)
+- [Setup Webserver](https://docs.sysreptor.com/setup/webserver.md)
+- [Updates](https://docs.sysreptor.com/setup/updates.md)
+- [Backups](https://docs.sysreptor.com/setup/backups.md)
+- [Upgrade to Professional](https://docs.sysreptor.com/setup/upgrade-to-professional.md)
+
+### Writing Reports
+
+- [Markdown Features](https://docs.sysreptor.com/reporting/markdown-features.md)
+- [Notes](https://docs.sysreptor.com/reporting/notes.md)
+- [Comments and Review](https://docs.sysreptor.com/reporting/comments-and-review.md)
+- [Version History](https://docs.sysreptor.com/reporting/version-history.md)
+- [Spell Check](https://docs.sysreptor.com/reporting/spell-check.md)
+- [References](https://docs.sysreptor.com/reporting/references.md)
+- [Creating findings from templates](https://docs.sysreptor.com/finding-templates/create-finding.md)
+- [Collaborative Editing](https://docs.sysreptor.com/reporting/collaborative-editing.md)
+- [Image Editor](https://docs.sysreptor.com/reporting/image-editor.md)
+- [AI Agent](https://docs.sysreptor.com/reporting/ai-agent.md)
+- [Shortcuts](https://docs.sysreptor.com/reporting/shortcuts.md)
+
+### Designing Reports
+
+- [Report Designer](https://docs.sysreptor.com/designer/designer.md)
+- [Report Field Types](https://docs.sysreptor.com/designer/field-types.md)
+- [Design Guides](https://docs.sysreptor.com/designer/design-guides.md)
+- [Page Layout](https://docs.sysreptor.com/designer/page-layout.md)
+- [Headings and Table of Contents](https://docs.sysreptor.com/designer/headings-and-table-of-contents.md)
+- [Tables](https://docs.sysreptor.com/designer/tables.md)
+- [Figures](https://docs.sysreptor.com/designer/figures.md)
+- [Charts](https://docs.sysreptor.com/designer/charts.md)
+- [Findings](https://docs.sysreptor.com/designer/findings.md)
+- [Formatting Utilities](https://docs.sysreptor.com/designer/formatting-utils.md)
+- [Filename](https://docs.sysreptor.com/designer/filenames.md)
+- [Debugging](https://docs.sysreptor.com/designer/debugging.md)
+- [Frequently Asked Questions (FAQs)](https://docs.sysreptor.com/designer/faqs.md)
+
+### Finding Templates
+
+- [Templates](https://docs.sysreptor.com/finding-templates/overview.md)
+- [Creating findings from templates](https://docs.sysreptor.com/finding-templates/create-finding.md)
+- [Multilingual templates](https://docs.sysreptor.com/finding-templates/multilingual.md)
+
+### Users and Permissions
+
+- [User Permissions](https://docs.sysreptor.com/users/user-permissions.md)
+- [Forgot your SysReptor Password?](https://docs.sysreptor.com/users/forgot-password.md)
+- [Notifications](https://docs.sysreptor.com/users/notifications.md)
+
+#### Single Sign-On
+
+- [SSO Setup with OIDC](https://docs.sysreptor.com/users/oidc-setup.md)
+- [Keycloak OIDC Configuration](https://docs.sysreptor.com/users/oidc-keycloak.md)
+- [Microsoft Entra ID OIDC Configuration](https://docs.sysreptor.com/users/oidc-entra-id.md)
+- [Google OIDC Configuration](https://docs.sysreptor.com/users/oidc-google.md)
+- [Microsoft ADFS OIDC Configuration](https://docs.sysreptor.com/users/oidc-adfs.md)
+- [Generic OIDC Configuration](https://docs.sysreptor.com/users/oidc-generic.md)
+
+### Python Integration
+
+- [reptor](https://docs.sysreptor.com/python-library.md)
+
+#### Tutorial
+
+- [Interacting with SysReptor projects](https://docs.sysreptor.com/python-library/tutorial/part-1/projects.md)
+- [Interacting with SysReptor findings](https://docs.sysreptor.com/python-library/tutorial/part-2/findings.md)
+- [Interacting with SysReptor notes](https://docs.sysreptor.com/python-library/tutorial/part-3/notes.md)
+
+#### API
+
+- [Projects API](https://docs.sysreptor.com/python-library/api/projects.md)
+- [Notes API](https://docs.sysreptor.com/python-library/api/notes.md)
+- [Finding Templates API](https://docs.sysreptor.com/python-library/api/templates.md)
+- [Project Design API](https://docs.sysreptor.com/python-library/api/project-designs.md)
+
+#### Data Classes
+
+- [Project Data Classes](https://docs.sysreptor.com/python-library/dataclasses/project.md)
+- [Finding Data Classes](https://docs.sysreptor.com/python-library/dataclasses/finding.md)
+- [Section Data Classes](https://docs.sysreptor.com/python-library/dataclasses/section.md)
+- [Note Data Classes](https://docs.sysreptor.com/python-library/dataclasses/note.md)
+- [Finding Template Data Classes](https://docs.sysreptor.com/python-library/dataclasses/finding-template.md)
+- [Project Design Data Classes](https://docs.sysreptor.com/python-library/dataclasses/project-design.md)
+- [User Data Classes](https://docs.sysreptor.com/python-library/dataclasses/user.md)
+
+### Automize Reporting via CLI
+
+- [reptor](https://docs.sysreptor.com/cli/getting-started.md)
+- [Configuration](https://docs.sysreptor.com/cli/configuration.md)
+
+#### Tools
+
+- [Burp](https://docs.sysreptor.com/cli/tools/burp.md)
+- [Nessus](https://docs.sysreptor.com/cli/tools/nessus.md)
+- [Qualys](https://docs.sysreptor.com/cli/tools/qualys.md)
+- [OpenVAS](https://docs.sysreptor.com/cli/tools/openvas.md)
+- [nmap](https://docs.sysreptor.com/cli/tools/nmap.md)
+- [SSLyze](https://docs.sysreptor.com/cli/tools/sslyze.md)
+- [ZAP](https://docs.sysreptor.com/cli/tools/zap.md)
+
+#### Projects and Templates
+
+- [Project](https://docs.sysreptor.com/cli/projects-and-templates/project.md)
+- [CreateProject](https://docs.sysreptor.com/cli/projects-and-templates/createproject.md)
+- [PushProject](https://docs.sysreptor.com/cli/projects-and-templates/pushproject.md)
+- [DeleteProjects](https://docs.sysreptor.com/cli/projects-and-templates/deleteprojects.md)
+- [Finding](https://docs.sysreptor.com/cli/projects-and-templates/finding.md)
+- [FindingFromTemplate](https://docs.sysreptor.com/cli/projects-and-templates/findingfromtemplate.md)
+- [ExportFindings](https://docs.sysreptor.com/cli/projects-and-templates/exportfindings.md)
+- [DeleteFindings](https://docs.sysreptor.com/cli/projects-and-templates/deletefindings.md)
+- [Template](https://docs.sysreptor.com/cli/projects-and-templates/template.md)
+- [File](https://docs.sysreptor.com/cli/projects-and-templates/file.md)
+- [Note](https://docs.sysreptor.com/cli/projects-and-templates/note.md)
+- [Translate](https://docs.sysreptor.com/cli/projects-and-templates/translate.md)
+
+#### Utils
+
+- [Unpackarchive](https://docs.sysreptor.com/cli/utils/unpackarchive.md)
+- [Packarchive](https://docs.sysreptor.com/cli/utils/packarchive.md)
+
+#### Importers
+
+- [Defect Dojo](https://docs.sysreptor.com/cli/importers/defectdojo.md)
+- [Ghostwriter](https://docs.sysreptor.com/cli/importers/ghostwriter.md)
+
+#### Writing plugins
+
+- [How to write a tool plugin](https://docs.sysreptor.com/cli/writing-plugins/tools.md)
+- [How to write an importer](https://docs.sysreptor.com/cli/writing-plugins/importers.md)
+
+### Tech Insights
+
+- [SysReptor Architecture](https://docs.sysreptor.com/insights/architecture.md)
+- [Rendering Workflow](https://docs.sysreptor.com/insights/rendering-workflow.md)
+- [Archiving](https://docs.sysreptor.com/insights/archiving.md)
+- [Searching encrypted project data](https://docs.sysreptor.com/insights/project-search.md)
+- [Security Considerations](https://docs.sysreptor.com/insights/security-considerations.md)
+
+### Other
+
+- [AD Privileged Access Strategy](https://docs.sysreptor.com/d/ad/privileged-access-strategy.md)
+- [Alternatives to AttackForge Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-attackforge-reporting-tool.md)
+- [Alternatives to Canopy Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-canopy-reporting-tool.md)
+- [Alternatives to Dradis Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-dradis-reporting-tool.md)
+- [Alternatives to Faraday Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-faraday-reporting-tool.md)
+- [Alternatives to Ghostwriter Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-ghostwriter-reporting-tool.md)
+- [Alternatives to Hexway Hive Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-hexway-hive-reporting-tool.md)
+- [Alternatives to PenTest.WS Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-pentestws-reporting-tool.md)
+- [Alternatives to PeTeReport Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-petereport-reporting-tool.md)
+- [Alternatives to PlexTrac Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-plextrac-reporting-tool.md)
+- [Alternatives to Pwndoc Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-pwndoc-reporting-tool.md)
+- [Alternatives to Reconmap Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-reconmap-reporting-tool.md)
+- [Alternatives to Security Reporter Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-security-reporter-reporting-tool.md)
+- [Alternatives to Serpico Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-serpico-reporting-tool.md)
+- [Alternatives to vulnrepo Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-vulnrepo-reporting-tool.md)
+- [Alternatives to Vulnreport Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-vulnreport-reporting-tool.md)
+- [Alternatives to WriteHat Pentesting Reporting Tool](https://docs.sysreptor.com/s/alternative-to-writehat-reporting-tool.md)
+- [Contact us](https://docs.sysreptor.com/contact-us.md)
+- [Contribute to SysReptor](https://docs.sysreptor.com/get-involved.md)
+- [Cross-Site Request Forgery (CSRF)](https://docs.sysreptor.com/d/web/cross-site-request-forgery.md)
+- [Cross-site scripting (XSS)](https://docs.sysreptor.com/d/web/cross-site-scripting.md)
+- [Customize Pushed Findings](https://docs.sysreptor.com/cli/tools/customize-pushed-findings.md)
+- [Direct Memory Access](https://docs.sysreptor.com/d/ad/direct-memory-access.md)
+- [Downgrades](https://docs.sysreptor.com/setup/downgrades.md)
+- [Hack The Box Reporting](https://docs.sysreptor.com/htb-reporting-with-sysreptor.md)
+- [Insecure ADIDNS](https://docs.sysreptor.com/d/ad/insecure-adidns.md)
+- [Insecure HTTP cookies](https://docs.sysreptor.com/d/web/insecure-http-cookies.md)
+- [Insecure name resolution protocols](https://docs.sysreptor.com/d/ad/insecure-name-resolution-protocols.md)
+- [Insecure storage of session tokens](https://docs.sysreptor.com/d/web/insecure-storage-of-session-tokens.md)
+- [LSASS protection](https://docs.sysreptor.com/d/ad/lsass-protection.md)
+- [Network Access Control](https://docs.sysreptor.com/d/ad/network-access-control.md)
+- [OffSec Reporting](https://docs.sysreptor.com/offsec-reporting-with-sysreptor.md)
+- [Path traversal / Directory traversal](https://docs.sysreptor.com/d/web/path-traversal.md)
+- [Pentest Reporting Tools - A List of the most popular tools](https://docs.sysreptor.com/s/pentest-reporting-tools.md)
+- [Plugins](https://docs.sysreptor.com/setup/plugins.md)
+- [Preboot Execution Environment](https://docs.sysreptor.com/d/ad/preboot-execution-environment.md)
+- [Reports created with SysReptor ❤️](https://docs.sysreptor.com/demo-reports.md)
+- [Resource-based Constrained Delegation (RBCD)](https://docs.sysreptor.com/d/ad/resource-based-constrained-delegation.md)
+- [SQL injection (SQLi)](https://docs.sysreptor.com/d/web/sql-injection.md)
+- [SysReptor Community License 1.1 (SysReptorL)](https://docs.sysreptor.com/license.md)
+- [Tools for OSCP Reporting](https://docs.sysreptor.com/oscp-reporting-tools.md)
+- [Untitled](https://docs.sysreptor.com/data-privacy.md)
+- [Use nginx as a web server](https://docs.sysreptor.com/setup/webserver-nginx.md)
+- [User enumeration](https://docs.sysreptor.com/d/web/user-enumeration.md)
