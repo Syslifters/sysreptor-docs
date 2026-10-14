@@ -1,0 +1,104 @@
+---
+url: https://docs.sysreptor.com/cli/projects-and-templates/template.md
+---
+# Template
+
+Upload and query Finding Templates from SysReptor
+
+## Upload finding templates
+
+```shell
+cat template.json | reptor template
+cat template.toml | reptor template
+```
+
+### Sample finding template
+
+Upload one finding template by using the following structures.\
+Use a list to upload multiple finding templates.
+
+```json
+{
+  "tags": [
+    "web"
+  ],
+  "translations": [
+    {
+      "language": "en-US",
+      "is_main": true,
+      "status": "finished",
+      "data": {
+        "title": "My Title",
+        "description": "My Description"
+      }
+    }
+  ]
+}
+```
+
+```toml
+tags = [
+    "web",
+]
+
+[[translations]]
+is_main = true
+language = "en-US"
+status = "finished"
+
+[translations.data]
+title = "My title"
+description = "My description"
+```
+
+## Update finding templates
+
+You can update an existing finding template by providing its UUID with the `--update` parameter.
+
+```shell
+cat template.json | reptor template --update <UUID>
+cat template.toml | reptor template --update <UUID>
+```
+
+::: info
+Only one template can be updated at a time. If you attempt to update with multiple templates, you will receive an error.
+:::
+
+::: tip
+To get the UUID of an existing template, use `reptor template --search <keyword>` to list templates with their IDs.
+:::
+
+## Read finding templates
+
+```shell
+reptor template --list  # template overview
+reptor template --search SQL  # template overview, search for keywords
+reptor template --search SQL --export plain  # print templates for copy&paste
+reptor template --search SQL --export plain --language en  # filter for language
+reptor template --export json  # export templates as json
+reptor template --search SQL --export json  # search for keyword
+reptor template --export tar.gz  # export all templates as tar.gz (importable via SysReptor web interface)
+```
+
+## Usage
+
+```txt
+usage: reptor template [-h] [--list] [--search SEARCH] [--update UPDATE]
+                       [--language LANGUAGE]
+                       [--export {tar.gz,json,yaml,plain}] [-o FILENAME]
+
+Queries Finding Templates from SysReptor
+
+options:
+  -h, --help            show this help message and exit
+  -o FILENAME, --output FILENAME
+                        Filename for output
+
+  --list                List all finding templates
+  --search SEARCH       Search for term
+  --update UPDATE       Update existing template with given UUID
+  --language LANGUAGE   Template language for export format "plain", e.g. "en"
+  --export {tar.gz,json,yaml,plain}
+                        Export templates
+
+```
