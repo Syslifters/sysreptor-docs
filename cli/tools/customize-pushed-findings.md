@@ -1,0 +1,72 @@
+---
+url: https://docs.sysreptor.com/cli/tools/customize-pushed-findings.md
+---
+# Customize Pushed Findings
+
+::: warning Deprecated
+CLI importers are deprecated. Import scan results from the SysReptor web UI using the [scanimport](https://github.com/Syslifters/sysreptor/tree/main/plugins/scanimport) plugin instead.
+:::
+
+When using `reptor <plugin> --push-findings`, reptor aggregates all findings by scan plugin (so that, e.g., "SQL Injection" is only added once for multiple affected systems). It uses descriptions from the scanning tools.
+
+But sometimes, you want to customize the finding descriptions or ratings. Here's how you do it.
+
+*This description might not apply to all reptor tool plugins. It is, however, applicable at least to Nessus, OpenVAS, and Burp.*
+
+Let's say we want to replace the title and the CVSS score of the SQL injection finding in a Burp report.
+
+## Copy default templates to your home directory
+
+The first step is to copy the templates shipped with reptor to your home directory. Use the following command:
+
+```shell
+reptor plugins --copy burp
+```
+
+This command copies the templates (usually in TOML format) to ~/.sysreptor/plugins/Burp/findings. Templates in this location override the default templates shipped with reptor. Changes in those templates are effective immediately.
+
+## Customize templates with static text
+
+The `global.toml` template holds the information populated to SysReptor when pushing findings.
+
+![Contents of global.toml](/cli/assets/burp_global_toml.png)
+
+The variables use the Django template language but with [different markers](/cli/writing-plugins/tools#formatting-tool-output) (enclosed in HTML comments). Changes in this file will affect all findings pushed from the command line to your SysReptor report.
+
+If we want to customize the Burp SQL injection finding, we first need to find out the plugin ID (Burp calls it "type") of the plugin. We find the ID 1049088 in the [Portswigger Knowledge Base](https://portswigger.net/kb/issues/00100200_sql-injection) or in the notes if we upload Burp findings as notes (using `reptor burp -i burp.xml --upload`).
+
+We now copy `global.toml` and name it `1049088.toml`. We can now change the title and the CVSS score to static values:
+
+![Customized template](/cli/assets/burp_customized_sqli.png)
+
+If we now push the finding (e.g., using `reptor burp -i burp.xml --push-findings --include 1049088`), reptor uses our custom title.
+
+## Customize templates with dynamic text
+
+Burp includes lots of information in its reports that we do not use when pushing findings. You can check what variables exist using `reptor burp -i burp.xml --template-vars`.
+
+You'll find, for example, the variable "confidence":
+
+```shell
+$ reptor burp -i burp.xml --template-vars
+[
+ {
+ <snip>
+ "severity": "high",
+ "confidence": "Firm",
+ <snip>
+```
+
+You can easily use this variable in your templates:
+
+![Customized template with "confidence"](/cli/assets/burp_customized_sqli_1.png)
+
+## Populate your changes to your colleagues
+
+Wouldn't it be nice if your colleagues could reuse your changes? That's easy.
+
+Push your findings to your finding templates using `reptor burp --upload-finding-templates` (your user needs permission to edit finding templates).
+
+![Pushed Burp SQLi template](/cli/assets/burp_pushed_finding_template.png)
+
+Finding templates having the tag "\<plugin\_name>:\<plugin\_id>" override local templates (shipped with reptor or in your home directory). The template is now effective for all SysReptor users using `reptor` to push Burp reports.

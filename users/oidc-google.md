@@ -1,0 +1,109 @@
+---
+url: https://docs.sysreptor.com/users/oidc-google.md
+---
+
+# Google OIDC Configuration
+
+## Configuration at Google
+
+1. Open [Google Cloud Console](https://console.cloud.google.com/)
+
+   * Make sure to select the correct organization:
+
+   ![Google Cloud Console Organization](/images/google_cloud_console.png){ style="width: 60%" }
+
+2. Use search box and click "Create a Project"
+
+   ![Click "Create a Project"](/images/google_call_create_project.png){ style="width: 60%" }
+
+3. Enter Name, Organization, Location and "Create"
+
+   ![Enter project details](/images/google_create_project.png){ style="width: 60%" }
+
+4. Search for and call "OAuth consent screen"
+
+5. Select "Internal" for "User Type" and "Create"
+
+   ![Select "User Type" "Internal"](/images/google_user_type_internal.png){ style="width: 60%" }
+
+6. Enter "App information"
+
+   ![Enter App information](/images/google_app_information.png){ style="width: 60%" }
+
+7. Optional: Add App logo
+
+   * You can use [this](/images/sysreptor_120x120.png){ style="width: 60%" }
+
+8. Enter App domain info
+
+   ![App domain info](/images/google_app_domain.png){ style="width: 60%" }
+
+9. Enter Developer contact information and click "Save and Continue"
+
+   ![Add contact information and continue](/images/google_developer_info.png){ style="width: 60%" }
+
+10. Add the scopes `email`, `profile`, `openid` (don't forget to click "Update")
+
+    ![Add scopes](/images/google_add_scopes.png){ style="width: 60%" }
+
+11. Click "Save and Continue" and verify your data
+
+12. Go to "Credentials", "Create Credentials" and select "OAuth client ID"
+
+    ![Create credentials](/images/google_create_credentials.png){ style="width: 60%" }
+
+13. Select "Web Application" at "Application type" and enter a name
+
+    ![Enter client details](/images/google_client_data.png){ style="width: 60%" }
+
+14. You don't need any JavaScript origins
+
+15. Enter the URL to your SysReptor installation with the path `/login/oidc/google/callback` as Authorized redirect URI
+
+    ![Enter redirect URL](/images/google_authorized_redirect_uri.png){ style="width: 60%" }
+
+16. Click "Create"
+
+You should now have the following values:
+
+* Client ID
+* Client secret
+
+## SysReptor Configuration
+
+Create your OIDC configuration for SysReptor...
+
+```json
+{
+    "google": {
+        "label": "Google",
+        "client_id": "<client id>",
+        "client_secret": "<client secret>",
+        "server_metadata_url": "https://accounts.google.com/.well-known/openid-configuration",
+        "client_kwargs": {
+            "scope": "openid email profile",
+            "code_challenge_method": "S256"
+        },
+        "reauth_supported": false,
+        "user_identifier_claim": "email",
+        "require_email_verified": true
+    }
+}
+```
+
+...and add it to your [application settings](/setup/configuration#single-sign-on-sso) (`OIDC_AUTHLIB_OAUTH_CLIENTS`).
+
+The OIDC client needs to be able to establish a network connection to Google.
+Make sure to not block outgoing traffic.
+
+Other JSON fields, `user_identifier_claim`, and general SSO limitations are covered in [Generic OIDC configuration](/users/oidc-generic#sysreptor-configuration) and [Limitations](/users/oidc-generic#limitations).
+
+## Limitation: Reauthentication
+
+SysReptor reauthenticates users before critical actions. It therefore requires users to enter their authentication details (e.g. password and second factor, if configured).
+
+Google does not support enforced reauthentication. The reauthentication therefore redirects to Google. If the users are still authenticated at Google, they are redirected back and SysReptor regards the reauthentication as successful.
+
+This is a limitation by Google.
+
+To enforce reauthentication, users can set a password for their local SysReptor user. This will enforce reauthentication with the local user's credentials.
